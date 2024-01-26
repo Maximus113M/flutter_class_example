@@ -19,8 +19,8 @@ class HomeScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         leading: const FlutterLogo(),
-        backgroundColor: Colors.red[700],
-        surfaceTintColor: Colors.red,
+       backgroundColor: Colors.red[700],
+       surfaceTintColor: Colors.red,
         elevation: 15,
         shadowColor: Colors.black,
         actions: const [

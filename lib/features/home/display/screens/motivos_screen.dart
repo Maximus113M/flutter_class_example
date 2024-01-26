@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_class_example/core/utils/screen_size.dart';
 import 'package:flutter_class_example/features/home/display/providers/home_provider.dart';
-import 'package:flutter_class_example/features/home/display/widgets/home_screen_body.dart';
 import 'package:flutter_class_example/features/home/display/widgets/motivos_screen_body.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:provider/provider.dart';
 
@@ -13,7 +11,10 @@ class MotivosScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenSize.init(context);
+    if (context
+        .select((HomeProvider homeProvider) => homeProvider.motivos.isEmpty)) {
+      Provider.of<HomeProvider>(context, listen: false).getMotivos();
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -25,11 +26,13 @@ class MotivosScreen extends StatelessWidget {
         elevation: 15,
         shadowColor: Colors.black,
         leading: IconButton(
-            onPressed: () => context.pop(),
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            )),
+          onPressed: () =>
+              Provider.of<HomeProvider>(context, listen: false).closeMotivosScreen(context),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
         actions: const [
           Icon(
             Icons.logout,
@@ -46,7 +49,29 @@ class MotivosScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: MotivosScreenBody(homeProvider: Provider.of<HomeProvider>(context)),
+      body: MotivosScreenBody(
+        motivos:
+            Provider.of<HomeProvider>(context).motivos,
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          IconButton.filled(
+            style: ButtonStyle(
+                shape: MaterialStatePropertyAll(
+              ContinuousRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            )),
+            onPressed: () => Provider.of<HomeProvider>(context, listen: false)
+                .createMotivoDialog(context),
+            icon: const Icon(Icons.add),
+          ),
+          SizedBox(
+            height: ScreenSize.height * 0.04,
+          ),
+        ],
+      ),
     );
   }
 }

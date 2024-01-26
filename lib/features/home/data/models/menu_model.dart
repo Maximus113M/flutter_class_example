@@ -18,6 +18,11 @@ class MenuModel {
       icon: Icons.personal_injury,
     ),
     MenuModel(
+      name: 'Fichas',
+      path: '/fichas',
+      icon: Icons.school,
+    ),
+    MenuModel(
       name: 'Aprendices',
       path: '/aprendices',
       icon: Icons.group,
