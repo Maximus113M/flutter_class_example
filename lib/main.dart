@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_class_example/core/utils/utils.dart';
 import 'package:flutter_class_example/core/router/app_router.dart';
 import 'package:flutter_class_example/features/home/display/providers/home_provider.dart';
-import 'package:flutter_class_example/features/home/data/datasources/home_data_source.dart';
-import 'package:flutter_class_example/features/home/domain/use_cases/get_motivos_use_case.dart';
-import 'package:flutter_class_example/features/home/data/repositories/motivo_repository_impl.dart';
-import 'package:flutter_class_example/features/home/domain/use_cases/create_motivo_use_case.dart';
-import 'package:flutter_class_example/features/home/domain/use_cases/delete_motivo_use_case.dart';
+import 'package:flutter_class_example/features/reasons/display/providers/reasons_provider.dart';
+import 'package:flutter_class_example/features/reasons/data/datasources/reasons_data_source.dart';
+import 'package:flutter_class_example/features/reasons/domain/use_cases/get_reasons_use_case.dart';
+import 'package:flutter_class_example/features/reasons/domain/use_cases/delete_reason_use_case.dart';
+import 'package:flutter_class_example/features/reasons/domain/use_cases/create_reason_use_case.dart';
+import 'package:flutter_class_example/features/reasons/data/repositories/reasons_repository_impl.dart';
 
 import 'package:provider/provider.dart';
 
@@ -15,16 +17,19 @@ void main() {
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
-      create: (_) => HomeProvider(
-        getMotivoUseCase: GetMotivosUseCase(
-            homeRepository:
-                MotivoRepositoryImpl(homeDataSource: HomeDataSourceImpl())),
-        createMotivoUseCase: CreateMotivoUseCase(
-            homeRepository:
-                MotivoRepositoryImpl(homeDataSource: HomeDataSourceImpl())),
-        deleteMotivoUseCase: DeleteMotivoUseCase(
-            homeRepository:
-                MotivoRepositoryImpl(homeDataSource: HomeDataSourceImpl())),
+      create: (_) => HomeProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => ReasonsProvider(
+        getReasonsUseCase: GetReasonsUseCase(
+            reasonsRepository: ReasonsRepositoryImpl(
+                reasonDataSource: ReasonDataSourceImpl())),
+        createReasonUseCase: CreateReasonsUseCase(
+            reasonsRepository: ReasonsRepositoryImpl(
+                reasonDataSource: ReasonDataSourceImpl())),
+        deleteReasonUseCase: DeleteReasonUseCase(
+            reasonsRepository: ReasonsRepositoryImpl(
+                reasonDataSource: ReasonDataSourceImpl())),
       ),
     ),
   ], child: const MyApp()));
@@ -40,8 +45,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor:  Colors.red),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.flutterExample),
         useMaterial3: true,
       ),
       routerConfig: appRouter,

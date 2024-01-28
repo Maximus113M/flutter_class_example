@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_class_example/core/utils/screen_size.dart';
-import 'package:flutter_class_example/features/home/display/providers/home_provider.dart';
-import 'package:flutter_class_example/features/home/display/widgets/motivos_screen_body.dart';
+import 'package:flutter_class_example/core/utils/utils.dart';
+import 'package:flutter_class_example/features/reasons/display/providers/reasons_provider.dart';
+import 'package:flutter_class_example/features/reasons/display/widgets/reasons_screen_body.dart';
 
 import 'package:provider/provider.dart';
 
-class MotivosScreen extends StatelessWidget {
-  const MotivosScreen({super.key});
+class ReasonsScreen extends StatelessWidget {
+  const ReasonsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    if (context
-        .select((HomeProvider homeProvider) => homeProvider.motivos.isEmpty)) {
-      Provider.of<HomeProvider>(context, listen: false).getMotivos();
+    if (context.select(
+        (ReasonsProvider reasonsProvider) => reasonsProvider.reasons.isEmpty)) {
+      Provider.of<ReasonsProvider>(context, listen: false).getReasons(context);
     }
     return Scaffold(
       appBar: AppBar(
@@ -21,27 +21,17 @@ class MotivosScreen extends StatelessWidget {
           "Motivos",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.red[700],
-        surfaceTintColor: Colors.red,
+        backgroundColor: AppColors.flutterExample,
         elevation: 15,
         shadowColor: Colors.black,
         leading: IconButton(
-          onPressed: () =>
-              Provider.of<HomeProvider>(context, listen: false).closeMotivosScreen(context),
+          onPressed: () => Provider.of<ReasonsProvider>(context, listen: false)
+              .closeReasonsScreen(context),
           icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
         ),
-        actions: const [
-          Icon(
-            Icons.logout,
-            color: Colors.white,
-          ),
-          SizedBox(
-            width: 10,
-          )
-        ],
         shape: const ContinuousRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(45),
@@ -49,9 +39,8 @@ class MotivosScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: MotivosScreenBody(
-        motivos:
-            Provider.of<HomeProvider>(context).motivos,
+      body: ReasonsScreenBody(
+        reasons: Provider.of<ReasonsProvider>(context).reasons,
       ),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -63,8 +52,9 @@ class MotivosScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
             )),
-            onPressed: () => Provider.of<HomeProvider>(context, listen: false)
-                .createMotivoDialog(context),
+            onPressed: () =>
+                Provider.of<ReasonsProvider>(context, listen: false)
+                    .createReasonDialog(context),
             icon: const Icon(Icons.add),
           ),
           SizedBox(

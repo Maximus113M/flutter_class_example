@@ -7,6 +7,8 @@ environment:
   sdk: '>=3.1.0 <4.0.0'
 
 dependencies:
+  another_flushbar: ^1.12.30
+  dartz: ^0.10.1
   dio: ^5.4.0
   flutter:
     sdk: flutter

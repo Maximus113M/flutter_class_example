@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-class DeleteMotivoAlert extends StatelessWidget {
+class DeleteReasonAlert extends StatelessWidget {
   final String title;
   final String message;
   final Function() delete;
 
-  const DeleteMotivoAlert({
+  const DeleteReasonAlert({
     super.key,
     required this.title,
     required this.message,

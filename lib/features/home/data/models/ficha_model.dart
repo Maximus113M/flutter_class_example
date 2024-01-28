@@ -15,6 +15,6 @@ class FichaModel {
         id: json["id"],
         lead: json["nombre"],
         program: json[""],
-        number: json[""]: 
+        number: json[""],
       );
 }

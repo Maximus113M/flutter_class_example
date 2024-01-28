@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_class_example/core/utils/screen_size.dart';
+import 'package:flutter_class_example/core/utils/utils.dart';
 import 'package:flutter_class_example/features/home/display/providers/home_provider.dart';
 import 'package:flutter_class_example/features/home/display/widgets/home_screen_body.dart';
 
@@ -13,14 +13,14 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
+      backgroundColor: AppColors.flutterExampleBg,
       appBar: AppBar(
         title: const Text(
           "Flutter Example",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         leading: const FlutterLogo(),
-       backgroundColor: Colors.red[700],
-       surfaceTintColor: Colors.red,
+        backgroundColor: AppColors.flutterExample,
         elevation: 15,
         shadowColor: Colors.black,
         actions: const [

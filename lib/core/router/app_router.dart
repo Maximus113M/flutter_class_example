@@ -1,5 +1,6 @@
 import 'package:flutter_class_example/features/home/display/screens/home_screen.dart';
-import 'package:flutter_class_example/features/home/display/screens/motivos_screen.dart';
+import 'package:flutter_class_example/features/reasons/display/screens/reasons_screen.dart';
+
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
@@ -11,7 +12,11 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/motivos',
-      builder: (context, state) => const MotivosScreen(),
+      builder: (context, state) => const ReasonsScreen(),
+    ),
+    GoRoute(
+      path: '/fichas',
+      builder: (context, state) => const HomeScreen(),
     ),
   ],
 );

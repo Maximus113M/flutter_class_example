@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_class_example/core/utils/screen_size.dart';
 import 'package:go_router/go_router.dart';
 
-class CreateMotivoDialog extends StatelessWidget {
+class CreateReasonDialog extends StatelessWidget {
   final String title;
   final String message;
   final Function(String) onChange;
   final Function() save;
-  
-  const CreateMotivoDialog({
+
+  const CreateReasonDialog({
     super.key,
     required this.title,
     required this.message,
@@ -26,13 +26,16 @@ class CreateMotivoDialog extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
             fontWeight: FontWeight.bold),
       ),
-      
       content: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(message, maxLines: 2,textAlign: TextAlign.center, ) ,
+            Text(
+              message,
+              maxLines: 2,
+              textAlign: TextAlign.center,
+            ),
             SizedBox(
               height: ScreenSize.absoluteHeight * 0.03,
             ),
