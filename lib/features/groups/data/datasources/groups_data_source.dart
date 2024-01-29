@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_class_example/core/errors/exceptions.dart';
+//import 'package:flutter_class_example/core/services/auth_service.dart';
 import 'package:flutter_class_example/features/groups/data/models/group_model.dart';
 
 abstract class GroupsDataSource {
@@ -20,7 +21,8 @@ class GroupsDataSourceImpl extends GroupsDataSource {
   Future<List<GroupModel>> getGroups() async {
     try {
       List<GroupModel> groups = [];
-      final Response<List> response = await dio.get('motivo');
+      //final headers = {'Authorization': 'Bearer ${AuthService.user!.token!}'};
+      final Response<List> response = await dio.get('ficha', /*options: Options(headers: headers)*/);
 
       if (response.statusCode == 200) {
         groups = response.data!

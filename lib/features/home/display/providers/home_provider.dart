@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_class_example/core/services/auth_service.dart';
 
 import 'package:flutter_class_example/features/home/data/models/menu_model.dart';
 
@@ -8,4 +9,8 @@ class HomeProvider extends ChangeNotifier {
   bool isLoading = false;
 
   HomeProvider();
+
+  setUser(){
+   // AuthService.user= 
+  }
 }

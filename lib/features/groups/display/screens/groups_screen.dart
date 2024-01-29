@@ -11,7 +11,8 @@ class GroupsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Provider.of<GroupsProvider>(context).groups.isEmpty) {
+    if (context.select(
+        (GroupsProvider groupsProvider) => groupsProvider.groups.isEmpty)) {
       Provider.of<GroupsProvider>(context, listen: false).getGroups(context);
     }
     return Scaffold(
@@ -44,8 +45,15 @@ class GroupsScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.flutterExample.withOpacity(0.4),
-        onPressed: () => Provider.of<GroupsProvider>(context, listen: false)
-            .createGroupDialog(context),
+        onPressed: () {
+          if ( Provider.of<GroupsProvider>(context, listen: false)
+              .isLoading) {
+            return;
+          }
+
+          Provider.of<GroupsProvider>(context, listen: false)
+              .createGroupDialog(context);
+        },
         child: const Icon(
           Icons.add,
           color: AppColors.contrast,

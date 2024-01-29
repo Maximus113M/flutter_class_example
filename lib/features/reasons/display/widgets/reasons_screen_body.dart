@@ -25,7 +25,7 @@ class ReasonsScreenBody extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 10).copyWith(bottom: reasons.length-1 == index? 35: 5 ),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white,

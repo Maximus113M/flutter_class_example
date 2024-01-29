@@ -15,7 +15,7 @@ class ReasonsProvider extends ChangeNotifier {
   final CreateReasonsUseCase createReasonUseCase;
   final DeleteReasonUseCase deleteReasonUseCase;
   final GetReasonsUseCase getReasonsUseCase;
-  List<ReasonModel> reasons = [ReasonModel(id: 1, name: 'Enfermedad')];
+  List<ReasonModel> reasons = [];
   String newReasonName = '';
 
   bool isLoading = false;
@@ -30,18 +30,30 @@ class ReasonsProvider extends ChangeNotifier {
     if (isLoading) return;
     isLoading = true;
     final result = await getReasonsUseCase(NoParams());
-    result.fold(
-        (l) => InAppNotification.serverFailure(
-              context: context,
-              message: l.message,
-            ),
-        (r) => reasons = r);
+    result.fold((l) {
+      InAppNotification.serverFailure(
+        context: context,
+        message: l.message,
+      );
+    }, (r) {
+      reasons = r;
+      isLoading = false;
+    });
     notifyListeners();
-    isLoading = false;
+    
   }
 
   void createReason(BuildContext context) async {
     if (isLoading) return;
+    if (!validateName()) {
+      InAppNotification.showAppNotification(
+          context: context,
+          title: 'Datos Invalidos!',
+          message:
+              'Por favor revise la informacion, no pueden haber campos vacios',
+          type: NotificationType.warning);
+      return;
+    }
     isLoading = true;
     ReasonModel reason = ReasonModel(name: newReasonName);
 
@@ -86,6 +98,11 @@ class ReasonsProvider extends ChangeNotifier {
         ),
       ),
     );
+  }
+
+  bool validateName() {
+    if (newReasonName.trim().isNotEmpty) return true;
+    return false;
   }
 
   closeReasonsScreen(BuildContext context) {

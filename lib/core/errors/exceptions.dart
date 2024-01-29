@@ -9,6 +9,7 @@ class ServerException implements Exception {
 }
 
 enum ExceptionType {
+  signinException,
   sharedException,
   reasonsException,
   homeException,

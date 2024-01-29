@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_class_example/core/errors/exceptions.dart';
+//import 'package:flutter_class_example/core/services/auth_service.dart';
 
 import 'package:flutter_class_example/features/reasons/data/models/reasons_model.dart';
 
@@ -20,7 +21,8 @@ class ReasonDataSourceImpl extends ReasonDataSource {
   Future<List<ReasonModel>> getReasons() async {
     try {
       List<ReasonModel> reasons = [];
-      final Response<List> response = await dio.get('motivo');
+      //final headers = {'Authorization': 'Bearer ${AuthService.user!.token!}'};
+      final Response<List> response = await dio.get('motivo', /*options: Options(headers: headers)*/);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         reasons = response.data!.map((e) => ReasonModel.fromJson(e)).toList();

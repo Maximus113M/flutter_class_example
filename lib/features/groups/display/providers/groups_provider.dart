@@ -57,8 +57,8 @@ class GroupsProvider extends ChangeNotifier {
               message: l.message,
             ),
         (r) => groups = r);
-    notifyListeners();
     isLoading = false;
+    notifyListeners();
   }
 
   void createGroup(BuildContext context) async {
@@ -86,8 +86,9 @@ class GroupsProvider extends ChangeNotifier {
               context: context,
               message: l.message,
             ), (r) {
+      context.pop();
       String title = "Ficha Agregada!";
-      String message = "La nueva ficha ha sido creada con exito";
+      String message = "La nueva ficha ha sido creada con exito.";
       NotificationType type = NotificationType.success;
 
       if (!r) {
@@ -139,7 +140,7 @@ class GroupsProvider extends ChangeNotifier {
           context: context,
           title: 'Datos Invalidos!',
           message:
-              'Por favor revise los informacion, no pueden haber campos vacios y numeros sin (.), (,) o (-).',
+              'Por favor revise la informacion, no pueden haber campos vacios y numeros sin (.), (,) o (-).',
           type: NotificationType.warning);
       return;
     }
@@ -158,6 +159,7 @@ class GroupsProvider extends ChangeNotifier {
               context: context,
               message: l.message,
             ), (r) {
+      context.pop();
       String title = "Ficha Actualizada!";
       String message = "La ficha ha sido actualizada con exito";
       NotificationType type = NotificationType.success;
@@ -176,8 +178,8 @@ class GroupsProvider extends ChangeNotifier {
       );
     });
     clearTextControllers();
-    isLoading = false;
     groups.clear();
+    isLoading = false;
     notifyListeners();
   }
 
@@ -236,7 +238,7 @@ class GroupsProvider extends ChangeNotifier {
   }
 
   closeGroopScreen(BuildContext context) {
-    //groups.clear();
+    groups.clear();
     context.pop();
   }
 
@@ -249,8 +251,9 @@ class GroupsProvider extends ChangeNotifier {
       (l) =>
           InAppNotification.serverFailure(context: context, message: l.message),
       (r) {
+        context.pop();
         String title = "Ficha Eliminada!";
-        String message = "La Ficha ha sido eliminada con exito";
+        String message = "La ficha ha sido eliminada con exito";
         NotificationType type = NotificationType.success;
         if (!r) {
           title = 'Oh, no!';
@@ -268,7 +271,6 @@ class GroupsProvider extends ChangeNotifier {
         notifyListeners();
       },
     );
-
     isLoading = false;
   }
 
@@ -277,9 +279,12 @@ class GroupsProvider extends ChangeNotifier {
       showDialog(
         context: context,
         builder: (context) => DeleteAlert(
-            title: "Desea eliminar esta ficha?",
-            message: "Los datos no se podrán recuperar, desea continuar?",
-            delete: () => deleteGroup(context, id)),
+          title: "Desea eliminar esta ficha?",
+          message: "Los datos no se podrán recuperar, desea continuar?",
+          delete: () {
+            deleteGroup(context, id);
+          },
+        ),
       );
     }
   }

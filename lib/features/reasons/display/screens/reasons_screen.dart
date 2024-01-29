@@ -12,7 +12,8 @@ class ReasonsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (context.select(
-        (ReasonsProvider reasonsProvider) => reasonsProvider.reasons.isEmpty)) {
+        (ReasonsProvider reasonsProvider) => reasonsProvider.reasons.isEmpty) && context.select(
+        (ReasonsProvider reasonsProvider) => !reasonsProvider.isLoading)) {
       Provider.of<ReasonsProvider>(context, listen: false).getReasons(context);
     }
     return Scaffold(
