@@ -28,28 +28,31 @@ class ReasonsScreenBody extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.black12,
-                        ),
-                        borderRadius: BorderRadiusDirectional.circular(10),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black26,
-                            offset: Offset(3, 5),
-                            blurRadius: 10,
-                          )
-                        ]),
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.black12,
+                      ),
+                      borderRadius: BorderRadiusDirectional.circular(10),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black26,
+                          offset: Offset(3, 5),
+                          blurRadius: 10,
+                        )
+                      ],
+                    ),
                     child: ListTile(
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: 16, vertical: ScreenSize.height * 0.005),
                       onLongPress: () =>
                           Provider.of<ReasonsProvider>(context, listen: false)
                               .deleteReasonDialog(context, reasons[index].id),
                       leading: Icon(
                         Icons.description,
-                        size: ScreenSize.height * 0.05,
+                        size: ScreenSize.height * 0.06,
                       ),
                       title: Text(
-                        '#${reasons[index].id}',
+                        'ID: #${reasons[index].id}',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(

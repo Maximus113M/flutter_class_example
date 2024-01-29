@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_class_example/core/utils/screen_size.dart';
+import 'package:flutter_class_example/core/utils/utils.dart';
+
 import 'package:go_router/go_router.dart';
 
 class CreateReasonDialog extends StatelessWidget {
@@ -22,35 +23,36 @@ class CreateReasonDialog extends StatelessWidget {
       surfaceTintColor: Colors.white,
       title: Text(
         title,
-        style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontWeight: FontWeight.bold),
+        style: FontStyles.heading11(AppColors.flutterExample),
       ),
       content: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              message,
-              maxLines: 2,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: ScreenSize.absoluteHeight * 0.03,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                hintText: "Nombre",
+        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.01),
+        child: SizedBox(
+          width: ScreenSize.width * 0.6,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                message,
+                maxLines: 2,
+                textAlign: TextAlign.center,
               ),
-              onChanged: (value) => onChange(value),
-            ),
-          ],
+              SizedBox(
+                height: ScreenSize.absoluteHeight * 0.03,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  hintText: "Nombre",
+                ),
+                onChanged: (value) => onChange(value),
+              ),
+            ],
+          ),
         ),
       ),
       actionsAlignment: MainAxisAlignment.center,

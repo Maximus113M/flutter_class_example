@@ -19,12 +19,12 @@ class ReasonDataSourceImpl extends ReasonDataSource {
   @override
   Future<List<ReasonModel>> getReasons() async {
     try {
-      List<ReasonModel> motivos = [];
+      List<ReasonModel> reasons = [];
       final Response<List> response = await dio.get('motivo');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        motivos = response.data!.map((e) => ReasonModel.fromJson(e)).toList();
-        return motivos;
+        reasons = response.data!.map((e) => ReasonModel.fromJson(e)).toList();
+        return reasons;
       }
       return [];
     } catch (e) {

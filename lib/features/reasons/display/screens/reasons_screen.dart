@@ -16,6 +16,7 @@ class ReasonsScreen extends StatelessWidget {
       Provider.of<ReasonsProvider>(context, listen: false).getReasons(context);
     }
     return Scaffold(
+      backgroundColor: AppColors.flutterExampleBg,
       appBar: AppBar(
         title: const Text(
           "Motivos",
@@ -42,25 +43,14 @@ class ReasonsScreen extends StatelessWidget {
       body: ReasonsScreenBody(
         reasons: Provider.of<ReasonsProvider>(context).reasons,
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          IconButton.filled(
-            style: ButtonStyle(
-                shape: MaterialStatePropertyAll(
-              ContinuousRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            )),
-            onPressed: () =>
-                Provider.of<ReasonsProvider>(context, listen: false)
-                    .createReasonDialog(context),
-            icon: const Icon(Icons.add),
-          ),
-          SizedBox(
-            height: ScreenSize.height * 0.04,
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Provider.of<ReasonsProvider>(context, listen: false)
+            .createReasonDialog(context),
+        backgroundColor: AppColors.flutterExample.withOpacity(0.3),
+        child: const Icon(
+          Icons.add,
+          color: AppColors.contrast,
+        ),
       ),
     );
   }

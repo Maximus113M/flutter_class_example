@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_class_example/core/utils/utils.dart';
 import 'package:flutter_class_example/core/router/app_router.dart';
+import 'package:flutter_class_example/features/groups/data/datasources/groups_data_source.dart';
+import 'package:flutter_class_example/features/groups/data/repositories/groups_repository_impl.dart';
+import 'package:flutter_class_example/features/groups/display/providers/groups_provider.dart';
+import 'package:flutter_class_example/features/groups/domain/use_cases/create_group_use_case.dart';
+import 'package:flutter_class_example/features/groups/domain/use_cases/delete_group_use_case.dart';
+import 'package:flutter_class_example/features/groups/domain/use_cases/get_reasons_use_case.dart';
+import 'package:flutter_class_example/features/groups/domain/use_cases/update_group_use_case.dart';
 import 'package:flutter_class_example/features/home/display/providers/home_provider.dart';
 import 'package:flutter_class_example/features/reasons/display/providers/reasons_provider.dart';
 import 'package:flutter_class_example/features/reasons/data/datasources/reasons_data_source.dart';
@@ -32,6 +39,22 @@ void main() {
                 reasonDataSource: ReasonDataSourceImpl())),
       ),
     ),
+    ChangeNotifierProvider(
+      create: (_) => GroupsProvider(
+        getGroupsUseCase: GetGroupsUseCase(
+            groupsRepository:
+                GroupRepositoryImpl(groupsDataSource: GroupsDataSourceImpl())),
+        createGroupUseCase: CreateGroupUseCase(
+            groupsRepository:
+                GroupRepositoryImpl(groupsDataSource: GroupsDataSourceImpl())),
+        updateGroupUseCase: UpdateGroupUseCase(
+            groupsRepository:
+                GroupRepositoryImpl(groupsDataSource: GroupsDataSourceImpl())),
+        deleteGroupUseCase: DeleteGroupUseCase(
+            groupsRepository:
+                GroupRepositoryImpl(groupsDataSource: GroupsDataSourceImpl())),
+      ),
+    )
   ], child: const MyApp()));
 }
 

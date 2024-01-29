@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_class_example/core/helpers/use_case.dart';
 
 import 'package:flutter_class_example/core/utils/utils.dart';
+import 'package:flutter_class_example/core/helpers/use_case.dart';
+import 'package:flutter_class_example/core/shared/alerts/delete_alert.dart';
 import 'package:flutter_class_example/features/reasons/data/models/reasons_model.dart';
-import 'package:flutter_class_example/features/reasons/display/widgets/delete_reason_alert.dart';
 import 'package:flutter_class_example/features/reasons/display/widgets/create_reason_dialog.dart';
 import 'package:flutter_class_example/features/reasons/domain/use_cases/get_reasons_use_case.dart';
 import 'package:flutter_class_example/features/reasons/domain/use_cases/create_reason_use_case.dart';
@@ -79,7 +79,7 @@ class ReasonsProvider extends ChangeNotifier {
       context: context,
       builder: (context) => CreateReasonDialog(
         title: "Nuevo Motivo",
-        message: "Ingrese el nombre del nuevo motivo",
+        message: "Por favor, ingrese el nombre del nuevo motivo.",
         onChange: (p0) => newReasonName = p0,
         save: () => createReason(
           context,
@@ -127,7 +127,7 @@ class ReasonsProvider extends ChangeNotifier {
     if (id != null) {
       showDialog(
         context: context,
-        builder: (context) => DeleteReasonAlert(
+        builder: (context) => DeleteAlert(
             title: "Eliminar Motivo",
             message: "El archivo no se podrá recuperar, desea continuar?",
             delete: () => deleteReason(context, id)),

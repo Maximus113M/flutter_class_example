@@ -12,5 +12,5 @@ enum ExceptionType {
   sharedException,
   reasonsException,
   homeException,
-  classException,
+  groupsException,
 }
